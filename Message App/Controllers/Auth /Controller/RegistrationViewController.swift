@@ -15,11 +15,11 @@ class RegistrationViewController: UIViewController {
     
     // MARK: - UIElement
     
-    private let photoPlusImage: UIImageView = {
-        let image = UIImageView()
-        image.image = UIImage(systemName: "person.crop.circle")
-        image.tintColor = .white
-        return image
+    private let photoPlusBtn: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.setImage(UIImage(named: "plus_photo"), for: .normal)
+        btn.tintColor = .white
+        return btn
     }()
     
     private lazy var stackView: UIStackView = {
@@ -87,22 +87,22 @@ class RegistrationViewController: UIViewController {
     
     private func setupUI() {
         self.setBackgroundGradient()
-        view.addSubview(photoPlusImage)
+        view.addSubview(photoPlusBtn)
         view.addSubview(stackView)
     }
 
     // MARK: - Autolayout
     
     private func setConstraints() {
-        /// photoImage
-        photoPlusImage.snp.makeConstraints { make in
+        /// photoPlusBtn
+        photoPlusBtn.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(32)
             make.size.equalTo(120)
         }
         /// stackView
         stackView.snp.makeConstraints { make in
-            make.top.equalTo(photoPlusImage.snp.bottom).offset(32)
+            make.top.equalTo(photoPlusBtn.snp.bottom).offset(32)
             make.left.equalTo(view.snp.left).offset(32)
             make.right.equalTo(view.snp.right).offset(-32)
         }
@@ -125,13 +125,17 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc func handleSignUp() {
-        print("wait for check to sign up...")
+        guard let email = emailTextField.text else { return }
+        guard let password = passwordTextField.text else { return }
+        guard let fullname = fullNameTextField.text else { return }
+        guard let username = userNameTextField.text else { return }
+        
+        print(email)
+        print(password)
+        print(fullname)
+        print(username)
     }
-    
-    @objc func didTapToSignUp() {
-        print("Signing up ...")
-    }
-    
+        
     // MARK: - Helper
     
     private func checkFormStatus() {
