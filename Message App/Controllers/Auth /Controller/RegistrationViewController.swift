@@ -6,19 +6,23 @@
 //
 
 import UIKit
+import Firebase
 
 class RegistrationViewController: UIViewController {
     
     // MARK: - View Model
     
-    var viewModel = RegistractionViewModel()
+    private var viewModel = RegistractionViewModel()
+    private var profileImage: UIImage?
     
     // MARK: - UIElement
     
-    private let photoPlusBtn: UIButton = {
+    private lazy var photoPlusBtn: UIButton = {
         let btn = UIButton(type: .system)
         btn.setImage(UIImage(named: "plus_photo"), for: .normal)
         btn.tintColor = .white
+        btn.clipsToBounds = true
+        btn.addTarget(self, action: #selector(handleSelectPhoto), for: .touchUpInside)
         return btn
     }()
     
@@ -98,7 +102,7 @@ class RegistrationViewController: UIViewController {
         photoPlusBtn.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(32)
-            make.size.equalTo(120)
+            make.size.equalTo(140)
         }
         /// stackView
         stackView.snp.makeConstraints { make in
@@ -125,15 +129,15 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc func handleSignUp() {
-        guard let email = emailTextField.text else { return }
-        guard let password = passwordTextField.text else { return }
-        guard let fullname = fullNameTextField.text else { return }
-        guard let username = userNameTextField.text else { return }
-        
-        print(email)
-        print(password)
-        print(fullname)
-        print(username)
+        guard let profileImage = profileImage else { return }
+        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
+        viewModel.saveProfileInfo(imageData: imageData)
+    }
+    
+    @objc func handleSelectPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        present(imagePickerController, animated: true)
     }
         
     // MARK: - Helper
@@ -149,3 +153,16 @@ class RegistrationViewController: UIViewController {
     }
 }
 
+// MARK: - UINavigationControllerDelegate
+
+extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[.originalImage] as? UIImage
+        profileImage = image
+        photoPlusBtn.setImage(image?.withRenderingMode(.alwaysOriginal), for: .normal)
+        photoPlusBtn.layer.cornerRadius = photoPlusBtn.frame.size.width / 2
+        photoPlusBtn.layer.borderColor = UIColor.white.cgColor
+        photoPlusBtn.layer.borderWidth = 3
+        dismiss(animated: true)
+    }
+}
