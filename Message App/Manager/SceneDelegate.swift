@@ -13,12 +13,27 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowwScene = (scene as? UIWindowScene) else { return }
-        let window = UIWindow(windowScene: windowwScene)
-        let navVC = UINavigationController(rootViewController: ConversationController())
-        window.rootViewController = navVC
-        window.makeKeyAndVisible()
-        self.window = window
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        
+        let vc:UIViewController
+        if AuthService.shared.isSignedIn {
+            let navVC = UINavigationController(rootViewController: ConversationController())
+            navVC.navigationBar.prefersLargeTitles = true
+            
+            vc = navVC
+            
+        }else{
+            let signInVC = LoginViewController()
+            signInVC.navigationItem.largeTitleDisplayMode = .always
+            let navVC = UINavigationController(rootViewController:signInVC )
+            navVC.navigationBar.prefersLargeTitles = true
+            vc = navVC
+        }
+        
+        window?.windowScene = windowScene
+        window?.rootViewController = vc
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

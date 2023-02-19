@@ -125,7 +125,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func handleLogin() {
-        print("wait for check to login...")
+        viewModel.checkUserLogin(vc: self)
     }
     
     @objc func goToSignUp() {

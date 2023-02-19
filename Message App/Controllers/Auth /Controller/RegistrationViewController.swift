@@ -130,8 +130,7 @@ class RegistrationViewController: UIViewController {
     
     @objc func handleSignUp() {
         guard let profileImage = profileImage else { return }
-        guard let imageData = profileImage.jpegData(compressionQuality: 0.3) else { return }
-        viewModel.saveProfileInfo(imageData: imageData)
+        viewModel.handleRegistraction(profileImage: profileImage, vc: self)
     }
     
     @objc func handleSelectPhoto() {

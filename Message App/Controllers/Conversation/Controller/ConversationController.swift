@@ -46,10 +46,12 @@ class ConversationController: UIViewController {
     
     private func navigationStyle() {
         navigationController?.setupNavStyle(vc: self, title: "Messages", preferLargeTitle: true, background: .systemPurple)
-        
-        ///Navgation Left BarButtonItem
+        /// Navgation Left BarButtonItem
         let image = UIImage(systemName: "person.circle.fill")
         navigationItem.leftBarButtonItems = [UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(showProfile))]
+        
+        /// Navigation Right BarButtonItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(handleSignOut))
     }
     
     private func setupUI() {
@@ -83,6 +85,21 @@ class ConversationController: UIViewController {
         let navVC = UINavigationController(rootViewController: NewMessageViewController())
         navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true)
+    }
+    
+    @objc func handleSignOut() {
+        AuthService.shared.signOut { [weak self] success in
+            guard let self = self else{ return }
+            
+            if success{
+                DispatchQueue.main.async {
+                    let vc = LoginViewController()
+                    let navVC = UINavigationController(rootViewController: vc)
+                    navVC.modalPresentationStyle = .fullScreen
+                    self.present(navVC, animated: true)
+                }
+            }
+        }
     }
 }
 
