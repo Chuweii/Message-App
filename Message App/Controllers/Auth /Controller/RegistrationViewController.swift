@@ -129,7 +129,10 @@ class RegistrationViewController: UIViewController {
     }
     
     @objc func handleSignUp() {
-        guard let profileImage = profileImage else { return }
+        guard let profileImage = profileImage else {
+            self.normalAlert(title: "Sign up error", message: "Please pick a photo.")
+            return
+        }
         viewModel.handleRegistraction(profileImage: profileImage, vc: self)
     }
     
@@ -152,7 +155,7 @@ class RegistrationViewController: UIViewController {
     }
 }
 
-// MARK: - UINavigationControllerDelegate
+// MARK: - UINavigationControllerDelegate, UIImagePickerControllerDelegate
 
 extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

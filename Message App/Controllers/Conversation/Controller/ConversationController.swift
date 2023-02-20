@@ -75,10 +75,10 @@ class ConversationController: UIViewController {
     // MARK: - Selectors
     
     @objc func showProfile() {
-        let loginNavVC = UINavigationController(rootViewController: LoginViewController())
-        loginNavVC.modalPresentationStyle = .fullScreen
-        loginNavVC.navigationBar.tintColor = .white
-        present(loginNavVC, animated: true)
+//        let loginNavVC = UINavigationController(rootViewController: LoginViewController())
+//        loginNavVC.modalPresentationStyle = .fullScreen
+//        loginNavVC.navigationBar.tintColor = .white
+//        present(loginNavVC, animated: true)
     }
     
     @objc func showNewMessage() {

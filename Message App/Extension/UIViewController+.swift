@@ -11,6 +11,7 @@ import JGProgressHUD
 extension UIViewController {
     
     static let hud = JGProgressHUD(style: .dark)
+    
     /// Seg Background gradient
     func setBackgroundGradient() {
         let gradient = CAGradientLayer()
@@ -39,7 +40,7 @@ extension UIViewController {
         }
     }
     
-    func signInErrorAlert(title:String, message:String){
+    func normalAlert(title:String, message:String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JGProgressHUD
 
 struct LoginViewViewModel {
     var email: String?
@@ -18,17 +19,22 @@ struct LoginViewViewModel {
     }
     
     func checkUserLogin(vc: UIViewController) {
-        AuthService.shared.signIn(email: email!, password: password!) { result in
+        vc.showLoader(true, withText: "Loging in ...")
+        
+        AuthService.shared.signIn(email: email!, password: password!) { result, error  in
             if result{
                 DispatchQueue.main.async {
+                    vc.showLoader(false)
                     let viewController = ConversationController()
                     let navVC = UINavigationController(rootViewController: viewController)
                     navVC.navigationBar.prefersLargeTitles = true
                     navVC.modalPresentationStyle = .fullScreen
                     vc.present(navVC, animated: true)
                 }
-            }else{
-                vc.signInErrorAlert(title: "Sign in error", message: "Please checked email and password again.")
+            } else {
+                vc.showLoader(false)
+                guard let error = error?.localizedDescription else { return }
+                vc.normalAlert(title: "Sign in error", message: error)
             }
         }
     }

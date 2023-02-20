@@ -22,7 +22,7 @@ class AuthService {
     
     // MARK: - Sign In & Sign Out
     
-    public func signIn(email: String, password: String, completion: @escaping (Bool) -> Void){
+    public func signIn(email: String, password: String, completion: @escaping (Bool, Error?) -> Void){
         guard !email.trimmingCharacters(in: .whitespaces).isEmpty,
               !password.trimmingCharacters(in: .whitespaces).isEmpty,
               password.count >= 6 else{
@@ -31,10 +31,10 @@ class AuthService {
         
         auth.signIn(withEmail: email, password: password) { result, error in
             guard result != nil, error == nil else{
-                completion(false)
+                completion(false, error)
                 return
             }
-            completion(true)
+            completion(true, error)
         }
     }
     
@@ -48,17 +48,10 @@ class AuthService {
             completion(false)
         }
     }
-
+    
     // MARK: - Sign Up & Create User
     
-    public func signUp(credentials: RegistractionCredentials, completion: @escaping (Bool) -> Void){
-        /// Check sign up info
-        guard !credentials.email.trimmingCharacters(in: .whitespaces).isEmpty,
-              !credentials.password.trimmingCharacters(in: .whitespaces).isEmpty,
-              credentials.password.count >= 6 else{
-            return
-        }
-        
+    public func signUp(credentials: UserInfoModel, completion: @escaping (Error?) -> Void){
         /// Save userinfo to firebase storage & create user
         guard let imageData = credentials.profileImage.jpegData(compressionQuality: 0.3) else { return }
         let filename = NSUUID().uuidString
@@ -66,7 +59,7 @@ class AuthService {
         
         ref.putData(imageData,metadata: nil) { (meta, error) in
             if let error = error {
-                print("DEBUG: Failed to upload image with error \(error.localizedDescription)")
+                completion(error)
                 return
             }
             
@@ -75,7 +68,7 @@ class AuthService {
                 
                 self.auth.createUser(withEmail: credentials.email, password: credentials.password) { (result, error) in
                     guard result != nil , error == nil else{
-                        completion(false)
+                        completion(error)
                         return
                     }
                     
@@ -89,61 +82,15 @@ class AuthService {
                     
                     Firestore.firestore().collection("users").document(uid).setData(data) { error in
                         if let error = error {
-                            print("DEBUG: Failed to upload user with error \(error.localizedDescription)")
+                            completion(error)
                         }
                         
                         print("DEBUG: Did create user..")
-                        completion(true)
-                    }
-                }
-            }
-        }
-        
-        auth.createUser(withEmail: credentials.email, password: credentials.password) { result , error in
-            guard result != nil , error == nil else{
-                completion(false)
-                return
-            }
-            completion(true)
-        }
-    }
-    
-    public func createUser(credentials: RegistractionCredentials, completion: (Error?) -> Void?) {
-        guard let imageData = credentials.profileImage.jpegData(compressionQuality: 0.3) else { return }
-        let filename = NSUUID().uuidString
-        let ref = Storage.storage().reference(withPath: "/profile_image/\(filename)")
-        
-        ref.putData(imageData,metadata: nil) { (meta, error) in
-            if let error = error {
-                print("DEBUG: Failed to upload image with error \(error.localizedDescription)")
-                return
-            }
-            
-            ref.downloadURL { url, error in
-                guard let profileImageUrl = url?.absoluteString else { return }
-                
-                self.auth.createUser(withEmail: credentials.email, password: credentials.password) { (result, error) in
-                    if let error = error {
-                        print("DEBUG: Failed to create user with error \(error.localizedDescription)")
-                    }
-                    
-                    guard let uid = result?.user.uid else { return }
-                    
-                    let data = ["email": credentials.email,
-                                "fullname": credentials.fullname,
-                                "profileImageUrl": profileImageUrl,
-                                "uid": uid,
-                                "username": credentials.username] as [String : Any]
-                    
-                    Firestore.firestore().collection("users").document(uid).setData(data) { error in
-                        if let error = error {
-                            print("DEBUG: Failed to upload user with error \(error.localizedDescription)")
-                        }
-                        
-                        print("DEBUG: Did create user..")
+                        completion(error)
                     }
                 }
             }
         }
     }
 }
+    

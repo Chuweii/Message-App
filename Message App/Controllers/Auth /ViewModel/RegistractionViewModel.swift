@@ -24,21 +24,26 @@ struct RegistractionViewModel {
         password?.trimmingCharacters(in: .whitespaces).isEmpty == false &&
         password!.count >= 6 &&
         userName?.trimmingCharacters(in: .whitespaces).isEmpty == false &&
-        fullName?.trimmingCharacters(in: .whitespaces).isEmpty == false
+        fullName?.trimmingCharacters(in: .whitespaces).isEmpty == false 
     }
     
     // MARK: - Function
     
     func handleRegistraction(profileImage: UIImage, vc: UIViewController) {
-                
-        let credentials = RegistractionCredentials(email: email!, password: password!, username: userName!, fullname: fullName!, profileImage: profileImage)
-        
-        AuthService.shared.createUser(credentials: credentials) { error in
-            if let error = error {
-                vc.signInErrorAlert(title: "Sign Up Error", message: error.localizedDescription)
+        let credentials = UserInfoModel(email: email!, password: password!, username: userName!, fullname: fullName!, profileImage: profileImage)
+        vc.showLoader(true, withText: "Signing up ...")
+
+        AuthService.shared.signUp(credentials: credentials) { error in
+            if error == nil {
+                vc.showLoader(false)
+                print("Successful to sign up!")
+                let viewController = ConversationController()
+                vc.navigationController?.pushViewController(viewController, animated: true)
+            } else {
+                vc.showLoader(false)
+                guard let error = error?.localizedDescription else { return }
+                vc.normalAlert(title: "Sign up error", message: error)
             }
-            print("Successful to sign up!")
-            vc.dismiss(animated: true)
         }
     }
 }
