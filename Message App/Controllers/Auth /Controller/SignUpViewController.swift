@@ -1,5 +1,5 @@
 //
-//  RegistrationViewController.swift
+//  SignUpViewController.swift
 //  Message App
 //
 //  Created by Wei Chu on 2023/1/28.
@@ -8,11 +8,11 @@
 import UIKit
 import Firebase
 
-class RegistrationViewController: UIViewController {
+class SignUpViewController: UIViewController {
     
     // MARK: - View Model
     
-    private var viewModel = RegistractionViewModel()
+    private var viewModel = SignUpViewModel()
     private var profileImage: UIImage?
     
     // MARK: - UIElement
@@ -133,7 +133,7 @@ class RegistrationViewController: UIViewController {
             self.normalAlert(title: "Sign up error", message: "Please pick a photo.")
             return
         }
-        viewModel.handleRegistraction(profileImage: profileImage, vc: self)
+        viewModel.handleSignUp(profileImage: profileImage, vc: self)
     }
     
     @objc func handleSelectPhoto() {
@@ -142,7 +142,7 @@ class RegistrationViewController: UIViewController {
         present(imagePickerController, animated: true)
     }
         
-    // MARK: - Helper
+    // MARK: - Check Status
     
     private func checkFormStatus() {
         if viewModel.formIsValid {
@@ -157,7 +157,7 @@ class RegistrationViewController: UIViewController {
 
 // MARK: - UINavigationControllerDelegate, UIImagePickerControllerDelegate
 
-extension RegistrationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let image = info[.originalImage] as? UIImage
         profileImage = image

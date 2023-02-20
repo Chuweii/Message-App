@@ -59,7 +59,7 @@ class LoginViewController: UIViewController {
         return btn
     }()
     
-    private lazy var shouldSignupBtn: UIButton = {
+    private lazy var goToSignUpBtn: UIButton = {
         let btn = UIButton(type: .system)
         let attributedTitle = NSMutableAttributedString(string: "Didn't have account?  ", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.white])
         attributedTitle.append(NSMutableAttributedString(string: "Sign Up", attributes: [.font: UIFont.boldSystemFont(ofSize: 18), .foregroundColor: UIColor.white]))
@@ -86,7 +86,7 @@ class LoginViewController: UIViewController {
         self.setBackgroundGradient()
         view.addSubview(iconImage)
         view.addSubview(stackView)
-        view.addSubview(shouldSignupBtn)
+        view.addSubview(goToSignUpBtn)
     }
 
     // MARK: - Autolayout
@@ -104,8 +104,8 @@ class LoginViewController: UIViewController {
             make.left.equalTo(view.snp.left).offset(32)
             make.right.equalTo(view.snp.right).offset(-32)
         }
-        /// shouldSignupBtn
-        shouldSignupBtn.snp.makeConstraints { make in
+        /// goToSignUpBtn
+        goToSignUpBtn.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
             make.width.equalTo(view.snp.width).multipliedBy(0.8)
@@ -130,11 +130,11 @@ class LoginViewController: UIViewController {
     }
     
     @objc func goToSignUp() {
-        let registerVC = RegistrationViewController()
+        let registerVC = SignUpViewController()
         navigationController?.pushViewController(registerVC, animated: true)
     }
     
-    // MARK: - Helper
+    // MARK: - Check Status
     
     private func checkFormStatus() {
         if viewModel.formIsValid {

@@ -1,5 +1,5 @@
 //
-//  RegistractionViewuserInfo.swift
+//  SignUpViewModel.swift
 //  Message App
 //
 //  Created by NeferUser on 2023/2/11.
@@ -10,7 +10,7 @@ import Firebase
 import FirebaseStorage
 import FirebaseAuth
 
-struct RegistractionViewModel {
+struct SignUpViewModel {
     
     // MARK: - Properties
     
@@ -29,7 +29,7 @@ struct RegistractionViewModel {
     
     // MARK: - Function
     
-    func handleRegistraction(profileImage: UIImage, vc: UIViewController) {
+    func handleSignUp(profileImage: UIImage, vc: UIViewController) {
         let credentials = UserInfoModel(email: email!, password: password!, username: userName!, fullname: fullName!, profileImage: profileImage)
         vc.showLoader(true, withText: "Signing up ...")
 

@@ -24,7 +24,7 @@
 		17BD79B1299620D3004407B6 /* LoginViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD79B0299620D3004407B6 /* LoginViewViewModel.swift */; };
 		17BD79B429964B5A004407B6 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD79B329964B5A004407B6 /* UIViewController+.swift */; };
 		17BD79B729975770004407B6 /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD79B629975770004407B6 /* LoginTextField.swift */; };
-		17BD79B929976643004407B6 /* RegistractionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD79B829976643004407B6 /* RegistractionViewModel.swift */; };
+		17BD79B929976643004407B6 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BD79B829976643004407B6 /* SignUpViewModel.swift */; };
 		17BD79BB29976C96004407B6 /* Asset.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 17BD79BA29976C96004407B6 /* Asset.xcassets */; };
 		17C00238299B3C5E00207159 /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C00237299B3C5E00207159 /* UINavigationController+.swift */; };
 		17C45FFC299B778F0086B259 /* NewMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C45FFB299B778F0086B259 /* NewMessageViewController.swift */; };
@@ -40,7 +40,7 @@
 		B22D01EF2973EA3C00A41590 /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D01EA2973EA3C00A41590 /* UICollectionView+.swift */; };
 		B22D01F12973EBD100A41590 /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D01F02973EBD100A41590 /* GenericTableView.swift */; };
 		B22D01FF2984D86C00A41590 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D01FE2984D86C00A41590 /* LoginViewController.swift */; };
-		B22D02012984D8BF00A41590 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D02002984D8BF00A41590 /* RegistrationViewController.swift */; };
+		B22D02012984D8BF00A41590 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B22D02002984D8BF00A41590 /* SignUpViewController.swift */; };
 		B22D02042985105000A41590 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B22D02032985105000A41590 /* SnapKit */; };
 /* End PBXBuildFile section */
 
@@ -58,7 +58,7 @@
 		17BD79B0299620D3004407B6 /* LoginViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewViewModel.swift; sourceTree = "<group>"; };
 		17BD79B329964B5A004407B6 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		17BD79B629975770004407B6 /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
-		17BD79B829976643004407B6 /* RegistractionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistractionViewModel.swift; sourceTree = "<group>"; };
+		17BD79B829976643004407B6 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		17BD79BA29976C96004407B6 /* Asset.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asset.xcassets; sourceTree = "<group>"; };
 		17C00237299B3C5E00207159 /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
 		17C45FFB299B778F0086B259 /* NewMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewController.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		B22D01EA2973EA3C00A41590 /* UICollectionView+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		B22D01F02973EBD100A41590 /* GenericTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
 		B22D01FE2984D86C00A41590 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		B22D02002984D8BF00A41590 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		B22D02002984D8BF00A41590 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,7 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				B22D01FE2984D86C00A41590 /* LoginViewController.swift */,
-				B22D02002984D8BF00A41590 /* RegistrationViewController.swift */,
+				B22D02002984D8BF00A41590 /* SignUpViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				17BD79B0299620D3004407B6 /* LoginViewViewModel.swift */,
-				17BD79B829976643004407B6 /* RegistractionViewModel.swift */,
+				17BD79B829976643004407B6 /* SignUpViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -363,7 +363,7 @@
 				B22D01CD2973DA6F00A41590 /* ConversationController.swift in Sources */,
 				B22D01C92973DA6F00A41590 /* AppDelegate.swift in Sources */,
 				17C00238299B3C5E00207159 /* UINavigationController+.swift in Sources */,
-				B22D02012984D8BF00A41590 /* RegistrationViewController.swift in Sources */,
+				B22D02012984D8BF00A41590 /* SignUpViewController.swift in Sources */,
 				17BD79B729975770004407B6 /* LoginTextField.swift in Sources */,
 				176B3F5F29949BD3008B98BD /* UITextField+.swift in Sources */,
 				B22D01ED2973EA3C00A41590 /* Dynamic.swift in Sources */,
@@ -375,7 +375,7 @@
 				B22D01CB2973DA6F00A41590 /* SceneDelegate.swift in Sources */,
 				17BD6BA02995E327004407B6 /* UIImageView+.swift in Sources */,
 				17C45FFF299B84AA0086B259 /* UserConversationCell.swift in Sources */,
-				17BD79B929976643004407B6 /* RegistractionViewModel.swift in Sources */,
+				17BD79B929976643004407B6 /* SignUpViewModel.swift in Sources */,
 				176B3F632994A6CE008B98BD /* UnderLineTextField.swift in Sources */,
 				17BD79B429964B5A004407B6 /* UIViewController+.swift in Sources */,
 				B22D01F12973EBD100A41590 /* GenericTableView.swift in Sources */,
