@@ -15,7 +15,13 @@ class GenericTableView<T, Cell: UITableViewCell>: UITableView, UITableViewDelega
     var configure: (Cell, T, IndexPath) -> Void
     var selectHandler: (T, IndexPath) -> Void
     
-    // MARK: - init
+    var height: CGFloat? = nil {
+        didSet {
+            self.reloadData()
+        }
+    }
+    
+    // MARK: - Init
     
     init(items: [T], configure: @escaping (Cell, T, IndexPath) -> Void, selectHandler: @escaping (T, IndexPath) -> Void) {
         self.items.value = items
@@ -30,6 +36,17 @@ class GenericTableView<T, Cell: UITableViewCell>: UITableView, UITableViewDelega
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Output
+    
+    func setItems(_ items: [T]) {
+        self.items.value = items
+        self.reloadData()
+    }
+    
+    func setHeight(_ height: CGFloat) {
+        self.height = height
     }
     
     // MARK: - UITableView
@@ -51,6 +68,6 @@ class GenericTableView<T, Cell: UITableViewCell>: UITableView, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return (height != nil) ? height!: UITableView.automaticDimension
     }
 }

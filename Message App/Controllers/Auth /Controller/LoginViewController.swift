@@ -95,7 +95,7 @@ class LoginViewController: UIViewController {
         /// iconImage
         iconImage.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(32)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
             make.size.equalTo(120)
         }
         /// stackView

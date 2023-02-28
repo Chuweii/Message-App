@@ -9,6 +9,9 @@ import UIKit
 import JGProgressHUD
 
 struct LoginViewViewModel {
+    
+    // MARK: - Properties
+    
     var email: String?
     var password: String?
     
@@ -18,10 +21,12 @@ struct LoginViewViewModel {
         && password!.count >= 6
     }
     
+    // MARK: - Method
+    
     func checkUserLogin(vc: UIViewController) {
         vc.showLoader(true, withText: "Loging in ...")
         
-        AuthService.shared.signIn(email: email!, password: password!) { result, error  in
+        AuthManager.shared.signIn(email: email!, password: password!) { result, error  in
             if result{
                 DispatchQueue.main.async {
                     vc.showLoader(false)

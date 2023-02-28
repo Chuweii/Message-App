@@ -88,10 +88,10 @@ class ConversationController: UIViewController {
     }
     
     @objc func handleSignOut() {
-        AuthService.shared.signOut { [weak self] success in
+        AuthManager.shared.signOut { [weak self] success in
             guard let self = self else{ return }
             
-            if success{
+            if success {
                 DispatchQueue.main.async {
                     let vc = LoginViewController()
                     let navVC = UINavigationController(rootViewController: vc)

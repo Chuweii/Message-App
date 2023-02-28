@@ -27,16 +27,16 @@ struct SignUpViewModel {
         fullName?.trimmingCharacters(in: .whitespaces).isEmpty == false 
     }
     
-    // MARK: - Function
+    // MARK: - Method
     
     func handleSignUp(profileImage: UIImage, vc: UIViewController) {
-        let credentials = UserInfoModel(email: email!, password: password!, username: userName!, fullname: fullName!, profileImage: profileImage)
+        let credentials = Credentials(email: email!, password: password!, username: userName!, fullname: fullName!, profileImage: profileImage)
         vc.showLoader(true, withText: "Signing up ...")
 
-        AuthService.shared.signUp(credentials: credentials) { error in
+        AuthManager.shared.signUp(credentials: credentials) { error in
             if error == nil {
                 vc.showLoader(false)
-                print("Successful to sign up!")
+                print("Success to sign up!")
                 let viewController = ConversationController()
                 vc.navigationController?.pushViewController(viewController, animated: true)
             } else {

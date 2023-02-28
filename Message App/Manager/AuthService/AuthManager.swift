@@ -1,5 +1,5 @@
 //
-//  AuthService.swift
+//  AuthManager.swift
 //  Message App
 //
 //  Created by NeferUser on 2023/2/16.
@@ -9,11 +9,12 @@ import Firebase
 import FirebaseStorage
 import FirebaseAuth
 
-class AuthService {
+class AuthManager {
     
-    // MARK: - Singleton & Properties
+    static let shared = AuthManager()
     
-    static let shared = AuthService()
+    // MARK: -  Properties
+    
     private let auth = Auth.auth()
     
     public var isSignedIn:Bool{
@@ -51,7 +52,7 @@ class AuthService {
     
     // MARK: - Sign Up & Create User
     
-    public func signUp(credentials: UserInfoModel, completion: @escaping (Error?) -> Void){
+    public func signUp(credentials: Credentials, completion: @escaping (Error?) -> Void){
         /// Save userinfo to firebase storage & create user
         guard let imageData = credentials.profileImage.jpegData(compressionQuality: 0.3) else { return }
         let filename = NSUUID().uuidString
@@ -84,8 +85,6 @@ class AuthService {
                         if let error = error {
                             completion(error)
                         }
-                        
-                        print("DEBUG: Did create user..")
                         completion(error)
                     }
                 }

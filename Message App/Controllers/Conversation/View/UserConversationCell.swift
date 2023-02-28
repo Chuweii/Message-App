@@ -7,14 +7,25 @@
 
 import UIKit
 import SnapKit
+import SDWebImage
 
 class UserConversationCell: UITableViewCell {
     
     static let identifier = "UserConversationCell"
     
+    // MARK: - Public
+    
+    public func configure(model: User) {
+        guard let profileImageUrl = URL(string: model.profileImageUrl) else { return }
+        
+        usernameLabel.text = model.username
+        fullnameLabel.text = model.fullname
+        profileImageView.sd_setImage(with: profileImageUrl)
+    }
+    
     // MARK: - UIElement
     
-    private let profileImageView: UIImageView = {
+    private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .systemPurple
         imageView.contentMode = .scaleAspectFill
@@ -27,14 +38,12 @@ class UserConversationCell: UITableViewCell {
         let stack = UIStackView(arrangedSubviews: [usernameLabel, fullnameLabel])
         stack.axis = .vertical
         stack.distribution = .fillEqually
-
         return stack
     }()
     
     private let usernameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
-        label.text = "Spiderman"
         return label
     }()
     
@@ -42,7 +51,6 @@ class UserConversationCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor = .lightGray
-        label.text = "Peter parker Peter parker Peter parker Peter parker Peter parker Peter parker Peter parker Peter parker Peter parker Peter parker"
         return label
     }()
 

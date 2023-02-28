@@ -8,19 +8,28 @@
 import UIKit
 
 class NewMessageViewController: UIViewController {
+        
+    private let viewModel = NewMessageViewModel()
     
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.register(UserConversationCell.self, forCellReuseIdentifier: UserConversationCell.identifier)
-        table.dataSource = self
-        table.delegate = self
-        return table
-    }()
+    // MARK: - UIElement
+    
+    private lazy var tableView = GenericTableView(items: viewModel.users.value) { (cell: UserConversationCell, item, indexpath) in
+        cell.configure(model: item)
+        
+    } selectHandler: { [weak self] item, indexpath in
+        let vc = ChatController()
+        vc.titleStr = item.username
+        self?.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    // MARK: - Lifecycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationStyle()
+        fetchUser()
         setupUI()
+        setBinding()
     }
     
     override func viewDidLayoutSubviews() {
@@ -38,6 +47,13 @@ class NewMessageViewController: UIViewController {
     private func setupUI() {
         view.backgroundColor = .white
         view.addSubview(tableView)
+        tableView.setHeight(80)
+    }
+    
+    // MARK: - Request
+    
+    private func fetchUser() {
+        viewModel.fetchUsers()
     }
     
     // MARK: - Autolayout
@@ -51,20 +67,12 @@ class NewMessageViewController: UIViewController {
     @objc func handleDismiss() {
         dismiss(animated: true)
     }
-}
-
-/// UITableView
-extension NewMessageViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: UserConversationCell.identifier, for: indexPath)
-        return cell
-    }
+    // MARK: - Method
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+    private func setBinding() {
+        viewModel.users.bind { [weak self] models in
+            self?.tableView.setItems(models)
+        }
     }
 }

@@ -34,7 +34,7 @@ class UnderlinedTextField: UITextField {
         self.layer.addSublayer(underlineLayer)
     }
     
-    // MARK: - Function
+    // MARK: - Method
     
     /// Size the underline layer and position it as a one point line under the text field.
     func setupUnderlineLayer() {

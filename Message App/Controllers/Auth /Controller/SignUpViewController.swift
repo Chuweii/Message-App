@@ -91,8 +91,16 @@ class SignUpViewController: UIViewController {
     
     private func setupUI() {
         self.setBackgroundGradient()
+        configNotification()
         view.addSubview(photoPlusBtn)
         view.addSubview(stackView)
+    }
+    
+    // MARK: - Notification Observer
+    
+    private func configNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     // MARK: - Autolayout
@@ -101,7 +109,7 @@ class SignUpViewController: UIViewController {
         /// photoPlusBtn
         photoPlusBtn.snp.makeConstraints { make in
             make.centerX.equalTo(view.snp.centerX)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(32)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(0)
             make.size.equalTo(140)
         }
         /// stackView
@@ -142,6 +150,18 @@ class SignUpViewController: UIViewController {
         present(imagePickerController, animated: true)
     }
         
+    @objc func keyboardWillShow() {
+        if view.frame.origin.y == 0 {
+            self.view.frame.origin.y -= 100
+        }
+    }
+    
+    @objc func keyboardWillHide(){
+        if view.frame.origin.y != 0 {
+            view.frame.origin.y = 0
+        }
+    }
+
     // MARK: - Check Status
     
     private func checkFormStatus() {
