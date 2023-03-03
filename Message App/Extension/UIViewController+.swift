@@ -12,23 +12,24 @@ extension UIViewController {
     
     static let hud = JGProgressHUD(style: .dark)
     
+    // MARK: - Properties
+    
+    var topbarHeight: CGFloat {
+           return UIApplication.shared.statusBarFrame.size.height +
+               (self.navigationController?.navigationBar.frame.height ?? 0.0)
+       }
+    
+    // MARK: - Methods
+    
     /// Seg Background gradient
-    func setBackgroundGradient() {
+    func setBackgroundGradient(headerColor: CGColor, footerColor: CGColor) {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemPink.cgColor]
+        gradient.colors = [headerColor, footerColor]
         gradient.locations = [0, 1]
         view.layer.addSublayer(gradient)
         gradient.frame = view.frame
     }
-    
-    func configureGradientLayer() {
-        let gradient = CAGradientLayer()
-        gradient.colors = [UIColor.systemPurple.cgColor, UIColor.systemPink.cgColor]
-        gradient.locations = [0, 1]
-        view.layer.addSublayer(gradient)
-        gradient.frame = view.frame
-    }
-    
+        
     func showLoader(_ show: Bool, withText text: String? = "Loading") {
         view.endEditing(true)
         UIViewController.hud.textLabel.text = text

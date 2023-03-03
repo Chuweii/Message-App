@@ -83,7 +83,7 @@ class LoginViewController: UIViewController {
     // MARK: - Setup UI
     
     private func setupUI() {
-        self.setBackgroundGradient()
+        self.setBackgroundGradient(headerColor: UIColor.systemPurple.cgColor, footerColor: UIColor.systemPink.cgColor)
         view.addSubview(iconImage)
         view.addSubview(stackView)
         view.addSubview(goToSignUpBtn)
