@@ -10,6 +10,8 @@
 		1719453629A34C8C0083698C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719453529A34C8C0083698C /* Service.swift */; };
 		1719453829A34F370083698C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719453729A34F370083698C /* User.swift */; };
 		1719453B29A353FD0083698C /* NewMessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1719453A29A353FD0083698C /* NewMessageViewModel.swift */; };
+		1721C78529B1CD0800F51311 /* MessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721C78429B1CD0700F51311 /* MessageCell.swift */; };
+		1721C78829B5819200F51311 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1721C78729B5819200F51311 /* Message.swift */; };
 		1728817E29A749F300B66DC7 /* CutomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1728817D29A749F300B66DC7 /* CutomInputView.swift */; };
 		174783FC299E1E4A00E422BC /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174783FB299E1E4A00E422BC /* AuthManager.swift */; };
 		174783FF299E381900E422BC /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174783FE299E381900E422BC /* Credentials.swift */; };
@@ -54,6 +56,8 @@
 		1719453529A34C8C0083698C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		1719453729A34F370083698C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		1719453A29A353FD0083698C /* NewMessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageViewModel.swift; sourceTree = "<group>"; };
+		1721C78429B1CD0700F51311 /* MessageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCell.swift; sourceTree = "<group>"; };
+		1721C78729B5819200F51311 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		1728817D29A749F300B66DC7 /* CutomInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutomInputView.swift; sourceTree = "<group>"; };
 		174783FB299E1E4A00E422BC /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		174783FE299E381900E422BC /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
@@ -115,6 +119,14 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		1721C78629B5817E00F51311 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1721C78729B5819200F51311 /* Message.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		1728817B29A748E400B66DC7 /* CutomInputView */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,6 +164,7 @@
 		176B3F5D299498E4008B98BD /* Conversation */ = {
 			isa = PBXGroup;
 			children = (
+				1721C78629B5817E00F51311 /* Model */,
 				1719453929A353C20083698C /* ViewModel */,
 				17C45FFD299B845A0086B259 /* View */,
 				17BD79AF299620A8004407B6 /* Controller */,
@@ -215,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				17C45FFE299B84AA0086B259 /* UserConversationCell.swift */,
+				1721C78429B1CD0700F51311 /* MessageCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,6 +420,7 @@
 				B22D01CD2973DA6F00A41590 /* ConversationController.swift in Sources */,
 				1719453629A34C8C0083698C /* Service.swift in Sources */,
 				1728817E29A749F300B66DC7 /* CutomInputView.swift in Sources */,
+				1721C78829B5819200F51311 /* Message.swift in Sources */,
 				17C1A21729A497FE00043007 /* ChatController.swift in Sources */,
 				B22D01C92973DA6F00A41590 /* AppDelegate.swift in Sources */,
 				17C00238299B3C5E00207159 /* UINavigationController+.swift in Sources */,
@@ -414,6 +429,7 @@
 				176B3F5F29949BD3008B98BD /* UITextField+.swift in Sources */,
 				B22D01ED2973EA3C00A41590 /* Dynamic.swift in Sources */,
 				1719453829A34F370083698C /* User.swift in Sources */,
+				1721C78529B1CD0800F51311 /* MessageCell.swift in Sources */,
 				1719453B29A353FD0083698C /* NewMessageViewModel.swift in Sources */,
 				B22D01EF2973EA3C00A41590 /* UICollectionView+.swift in Sources */,
 				17BD6B9C2995E227004407B6 /* QuantumValue.swift in Sources */,

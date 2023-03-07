@@ -15,9 +15,9 @@ extension UIViewController {
     // MARK: - Properties
     
     var topbarHeight: CGFloat {
-           return UIApplication.shared.statusBarFrame.size.height +
-               (self.navigationController?.navigationBar.frame.height ?? 0.0)
-       }
+        return UIApplication.shared.statusBarFrame.size.height +
+        (self.navigationController?.navigationBar.frame.height ?? 0.0)
+    }
     
     // MARK: - Methods
     

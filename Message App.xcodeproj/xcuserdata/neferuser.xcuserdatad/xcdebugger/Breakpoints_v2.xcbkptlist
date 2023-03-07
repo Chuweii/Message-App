@@ -14,8 +14,8 @@
             filePath = "Message App/Controllers/Conversation/Controller/ChatController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "setConstraints()"
             landmarkType = "7">
          </BreakpointContent>

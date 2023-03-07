@@ -13,24 +13,25 @@ class ChatController: UIViewController {
     // MARK: - Properties & UIElement
     
     var titleStr = ""
+    private var messages = [Message]()
     
     private lazy var customInputView: CutomInputView = {
         let inputView = CutomInputView()
-        
+        inputView.delegate = self
         return inputView
     }()
     
     private lazy var collectionView: UICollectionView = {
+        /// UICollectionView FlowLayout
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 50, height: 50)
-        layout.minimumInteritemSpacing = 1
-        layout.minimumLineSpacing = 2
+        layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        layout.sectionInset = .init(top: 16, left: 0, bottom: 16, right: 0)
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.dataSource = self
         collection.delegate = self
-        collection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collection.register(MessageCell.self, forCellWithReuseIdentifier: MessageCell.identifier)
         collection.alwaysBounceVertical = true
 
         return collection
@@ -51,6 +52,8 @@ class ChatController: UIViewController {
         return true
     }
     
+    // MARK: - Setup UI
+    
     private func setupUI() {
         title = titleStr
         view.backgroundColor = .white
@@ -63,7 +66,7 @@ class ChatController: UIViewController {
     
     private func setConstraints() {
         
-            collectionView.snp.makeConstraints { make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(view.snp.top).offset(topbarHeight + 10)
             make.left.equalTo(view.snp.left).offset(0)
             make.right.equalTo(view.snp.right).offset(0)
@@ -79,15 +82,21 @@ class ChatController: UIViewController {
     }
 }
 
+/// UICollectionView
 extension ChatController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageCell.identifier, for: indexPath)
         return cell
     }
 }
 
+/// CustomInputAccessoryDelegate
+extension ChatController: CustomInputAccessoryDelegate {
+    func inputView(_ inputView: CutomInputView, wantsToSend message: String) {
+        print("sended ... message")
+    }
+}

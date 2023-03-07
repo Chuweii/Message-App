@@ -8,7 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol CustomInputAccessoryDelegate: AnyObject {
+    func inputView(_ inputView: CutomInputView, wantsToSend message: String)
+}
+
 class CutomInputView: UIView {
+    
+    weak var delegate: CustomInputAccessoryDelegate?
     
     // MARK: - UIElement
     
@@ -101,7 +107,8 @@ class CutomInputView: UIView {
     // MARK: - Selector
     
     @objc func handleSendMessage() {
-        print("handle send message")
+        guard let message = messageInputView.text else { return }
+        delegate?.inputView(self, wantsToSend: message)
     }
     
     @objc func handleTextInputChange() {
